@@ -20,3 +20,14 @@ sapply(training.data.raw, function(x) length(unique(x))) # number of unique valu
 
 # S1B: Visualize missing values using Amelia package - maybe it's depricated
 ??Amelia
+
+# S1C: Use subset() to focus on most relavent data 
+# Irrelevant: PassId, Name, Cabin, Ticket, Parch? 
+str(training.data.raw) #  2, 3, 5, 6, 7, 8, 10, 12
+rawData <- subset(training.data.raw,select=c(2, 3, 5, 6, 7, 8, 10, 12)) # store important columns in df
+rawData 
+
+# Step 2 - Account for Missing Values: Deal with NAs
+# Replace NAs "by hand" <- Replace NA values with either: 1. average 2. median 3. mean
+# Use mean in this example (refer to sapply - sum(is.na(x)))
+data$Age[is.na(data$Age)] <- mean(data$Age,na.rm = TRUE) # Age had an NA count of 177
