@@ -1,6 +1,7 @@
 # Titanic Data Set Analysis - Logistic Regression Example 
 # Goal: Use Logit Regression Analysis to determine Titanic survival 
 # Predict probability someone will survive Titanic based on certain factors 
+browseURL("https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/")
 
 # Open datasets 
   
