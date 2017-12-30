@@ -60,3 +60,12 @@ train
 
 test <- myData[801:889,]
 test
+
+# 3B: Fit the model 
+# Specify parameter family=binomial in glm() function
+?glm  # used to fit generalized linear models by giving symbolic description of linear predictor & description of error distribution 
+model <- glm(Survived
+~., family=binomial(link='logit'), data=myData)
+
+model # print model output 
+summary(model) # Significant variables = Pclass, Sexmale, Age, SibSp
