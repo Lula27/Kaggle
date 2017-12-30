@@ -31,4 +31,10 @@ rawData
 # Step 2 - Account for Missing Values: Deal with NAs
 # Replace NAs "by hand" <- Replace NA values with either: 1. average 2. median 3. mean
 # Use mean in this example (refer to sapply - sum(is.na(x)))
-data$Age[is.na(data$Age)] <- mean(data$Age,na.rm = TRUE) # Age had an NA count of 177
+rawData$Age[is.na(rawData$Age)] <- mean(rawData$Age,na.rm = TRUE) # Age had an NA count of 177
+rawData$Age[is.na(rawData$Age)] # no values in the variable Age are NA values 
+
+# Use is.factor to check if categorical variables are encoded as factors
+# factor = how R deals categorical variables 
+is.factor(rawData$Sex)
+is.factor(rawData$Embarked)
