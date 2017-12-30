@@ -38,3 +38,25 @@ rawData$Age[is.na(rawData$Age)] # no values in the variable Age are NA values
 # factor = how R deals categorical variables 
 is.factor(rawData$Sex)
 is.factor(rawData$Embarked)
+
+# Use contrasts() to understand how R is going to deal w/ categorical variables
+# Contrasts() function shows how variables have been dummyfied in R & how to interpret them in model
+contrasts(rawData$Sex) # female dummyfied as 0; male = 1
+
+# Embarked = port of embarkation 
+# C = Cherbourg, Q = Queenstown, S = Southampton 
+contrasts(rawData$Embarked)
+# As for the missing values in Embarked, since there are only two
+# we will discard those two rows (we could also have
+# replaced the missing values with the mode and keep the datapoints).
+myData <- rawData[!is.na(rawData$Embarked),]
+myData
+rownames(myData) <- NULL
+
+# Step 3 - Model Fitting
+# 3A: split model into two chunks (training & testing set)
+train <- myData[1:800,]  # used to fit model which we will be testing over testing set
+train
+
+test <- myData[801:889,]
+test
