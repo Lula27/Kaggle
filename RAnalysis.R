@@ -98,6 +98,18 @@ pR2(model) #  McFadden =  0.3370165; r2ML =   0.3613519; What does this mean?
 
 
 # Step 5: Assessing the predictive ability of the model
+fitted.results <- predict(model, myData=subset(test, select = c(2,3,4,5,6,7,8)),
+                  type='response')
+                  fitted.results <- ifelse(fitted.results > 0.5,1,0)
+fitted.results <- ifelse(fitted.results > 0.5, 1, 0)
+fitted.results
 
+misClasificError <- mean(fitted.results != test$Survived)
+print(paste('Accuracy', 1-misClasificError)) # Hmmm...my accuracy is much lower :/ 
+# on website: "Accuracy 0.842696629213483"
+# 0.84 accuracy on the test set is quite a good result
+# keep in mind that this result is somewhat dependent on the manual split of the data
+# For more precision, use k-fold cross validation or another cross validation
 
-
+# 5b: use performcance measurment for binary classifier 
+# plot ROC curve and calculate the AUC (area under curve)
