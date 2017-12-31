@@ -111,5 +111,21 @@ print(paste('Accuracy', 1-misClasificError)) # Hmmm...my accuracy is much lower 
 # keep in mind that this result is somewhat dependent on the manual split of the data
 # For more precision, use k-fold cross validation or another cross validation
 
-# 5b: use performcance measurment for binary classifier 
+# 5b: use performcance measurment for binary classifier  - nothing is working :( 
+browseURL("http://gim.unmc.edu/dxtests/roc3.htm") # background info on Area Under an ROC Curve
 # plot ROC curve and calculate the AUC (area under curve)
+# Interpretation: .09 - 1 = excellent (A); .80-.90 = good(B); .70-.80 = fair(C); .60-.70=poor(D); .50-.60 = fail(F)
+install.packages("ROCR")
+require(ROCR)
+
+p <- predict(model, 
+             myData = subset(test, select = c(2,3,4,5,6,7,8)),
+             type="response")
+pr <- prediction(p, test$Survived) # got an error :/
+prf <- performance(pr, measure = "tpr", x.measure = "fpr")
+plot(prf)
+
+auc <- performance(pr, measure = "auc")
+auc <- auc@y.values[[1]]
+auc
+
