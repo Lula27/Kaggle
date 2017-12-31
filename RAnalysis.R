@@ -22,6 +22,9 @@ sapply(training.data.raw, function(x) length(unique(x))) # number of unique valu
 
 # S1B: Visualize missing values using Amelia package - maybe it's depricated
 ??Amelia
+install.packages("Amelia")
+?Amelia
+missmap(training.data.raw, main = "Missing values vs observed") # hmmm...still not working
 
 # S1C: Use subset() to focus on most relavent data 
 # Irrelevant: PassId, Name, Cabin, Ticket, Parch? 
