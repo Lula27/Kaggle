@@ -129,3 +129,5 @@ auc <- performance(pr, measure = "auc")
 auc <- auc@y.values[[1]]
 auc
 
+# Clean up
+rm(list = ls())
