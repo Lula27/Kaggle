@@ -1,6 +1,7 @@
 # Titanic Data Set Analysis - Logistic Regression Example 
 # Goal: Use Logit Regression Analysis to determine Titanic survival 
 # Predict probability someone will survive Titanic based on certain factors 
+# Logit model response variable is log odds: ln(odds) = ln(p/(1-p)) = a*xl + b*x2 +...+ z*xn
 browseURL("https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/")
 
 # Open datasets 
@@ -68,4 +69,32 @@ model <- glm(Survived
 ~., family=binomial(link='logit'), data=myData)
 
 model # print model output 
-summary(model) # Significant variables = Pclass, Sexmale, Age, SibSp
+summary(model) 
+# Interpretations: 
+# 1. Significant variables = Pclass, Sexmale, Age, SibSp
+# 2. Sexmale has lowest p-value suggesting a strong association of sex of passenger & propability the survived
+# 2 con't: since Sexmale = -2.272, male passenger less likely to have survived 
+# Since male is a dummy variable, being male reduces the log odds by 2.72
+# A unit increase in age reduces log odds by 0.039 
+# Curiosity - why are my values larger than the liturature I'm reading? 
+
+# Step 4: Interpret Results of Logistic Regression Model
+# 4b: Run anova() function to analyze table of deviance 
+anova(model, test = "Chisq") # I guess...chisq refers to chi squared 
+# Again, why do these values differ from r-bloggers example
+# Difference between the null deviance and the residual deviance = how model is doing against null model
+# Null model = model with only intercept
+# Wider gap, the better 
+# Notice that adding Pclass, Sex & Age significantly reduces the residual deviance
+
+#4c: use McFadden R2 index to assess model fit b/c there is no exact equivalent to the R2 of linear regression
+?pscl
+install.packages("pscl")
+library(pscl) 
+pR2(model) #  McFadden =  0.3370165; r2ML =   0.3613519; What does this mean?
+
+
+# Step 5: Assessing the predictive ability of the model
+
+
+
