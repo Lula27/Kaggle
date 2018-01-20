@@ -6,6 +6,7 @@ browseURL("https://www.r-bloggers.com/how-to-perform-a-logistic-regression-in-r/
 
 # Open datasets 
   
+
 test <- read.csv('C:\\Users\\loret\\Desktop\\DataSciencePrep\\Kaggle\\Titanic\\test.csv', header = TRUE)
 
 
@@ -131,3 +132,4 @@ auc
 
 # Clean up
 rm(list = ls())
+detach("package:ROCR", unload=TRUE)
