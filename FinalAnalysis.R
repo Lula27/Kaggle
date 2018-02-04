@@ -68,4 +68,9 @@ submit <- data.frame(PassengerId = model$PassengerId, Survived = model$final)
 View(submit)
 
 # Export as CSV file 
-write.csv()
+write.csv(submit, "C:\\Users\\loret\\Desktop\\DataSciencePrep\\Kaggle\\LA_Tsubmit.csv", row.names=FALSE)
+
+
+# Clear workspace
+rm(list = ls())
+dev.off()
