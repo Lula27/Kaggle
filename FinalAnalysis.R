@@ -14,6 +14,7 @@ rm(list = ls())
 # Use Decision Trees to Analyse Datasets 
 
 # Access libraries 
+install.packages("tree")
 library(tree)
 library(ISLR)
 library(rpart)
@@ -25,6 +26,7 @@ library(MASS)
 
 
 ?cbind
+?tree
 
 
 # Try with Anu Rajaram's work
@@ -40,3 +42,30 @@ View(train)
 test = read.delim(file = 'C:\\Users\\loret\\Desktop\\DataSciencePrep\\Kaggle\\Titanic\\cltest.csv', header = TRUE,
                     sep = ',', dec = '.')
 View(test)
+
+# Build Decision Tree Models
+tree1 <- tree(Survived ~ Pclass + Age + SibSp + Parch + male, data = train)
+
+summary(tree1)
+plot(tree1)
+text(tree1)
+
+# Make prediction to apply to new model
+Pred1 <- predict(tree1, test)
+
+model <- data.frame(PassengerId = test$PassengerId, Survived = Pred1, 
+                    gender = test$male)
+summary(model$Survived)
+
+# Using text(tree1), looks like male < 0.5
+
+# Applying predictions
+model$final[model$Survived <= 0.5] <- 0 # did not survive 
+model$final[model$Survive > 0.5] <- 1 # did survive 
+
+# Create submission file 
+submit <- data.frame(PassengerId = model$PassengerId, Survived = model$final)
+View(submit)
+
+# Export as CSV file 
+write.csv()
